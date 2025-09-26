@@ -1,27 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>23-Day Countdown for javascript</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: #0f172a; /* dark navy */
+      color: #f1f5f9;     /* light gray */
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    #countdown {
+      font-size: 3rem;
+      font-weight: bold;
+      background: #1e293b;
+      padding: 20px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    p {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      text-align: center;
+      max-width: 500px;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
-    <section class="features">
-        <div class="card">
-            <h2>🚀 Fast</h2>
-            <p>Our service is blazing fast.</p>
-            <button>Learn More</button>
-        </div>
-        <div class="card">
-            <h2>🔒 Secure</h2>
-            <p>Your data is safe with us.</p>
-            <button>Learn More</button>
-        </div>
-        <div class="card">
-            <h2>💡 Smart</h2><p>AI-powered features for you.</p>
-            <button>Learn More</button>
-        </div>
-    </section>
+
+  <h1>My 23-Day JavaScript Plan ⏳</h1>
+  <div id="countdown">Loading...</div>
+  <p>
+    This countdown tracks my journey through my JavaScript roadmap, 
+    starting tomorrow. Each day I’ll study for 1–2 hours, step by step, 
+    until I finish it in 23 days maybe more or less.
+  </p>
+
+  <script>
+    // set countdown to 23 days from tomorrow
+    const now = new Date();
+    const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    const endDate = new Date(startDate.getTime() + (23 * 24 * 60 * 60 * 1000));
+
+    const countdownEl = document.getElementById("countdown");
+
+    function updateCountdown() {
+      const currentTime = new Date().getTime();
+      const distance = endDate - currentTime;
+
+      if (distance < 0) {
+        countdownEl.innerHTML = "🎉 Plan Completed!";
+        clearInterval(timer);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
+
